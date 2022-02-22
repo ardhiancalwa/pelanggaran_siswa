@@ -1,6 +1,4 @@
-const { response } = require("express")
-
-// memamggil file model untuk siswa
+// memanggil file model untuk siswa
 let modelSiswa = require("../models/index").siswa
 
 exports.getDataSiswa = (request, response) => {
@@ -17,7 +15,7 @@ exports.getDataSiswa = (request, response) => {
 
 exports.addDataSiswa = (request, response) => {
     // tampung data request
-    let newSiswa  ={
+    let newSiswa = {
         nama: request.body.nama,
         kelas: request.body.kelas,
         poin: request.body.poin,
@@ -27,7 +25,7 @@ exports.addDataSiswa = (request, response) => {
     modelSiswa.create(newSiswa)
         .then(result => {
             return response.json({
-                message: `Data siswa berhasil ditambahkan `
+                message: `Data siswa berhasil ditambahkan`
             })
         })
         .catch(error => {
@@ -45,23 +43,24 @@ exports.editDataSiswa = (request, response) => {
         poin: request.body.poin,
         kelas: request.body.kelas
     }
-    modelSiswa.update(dataSiswa, {where: {id_siswa: id}})
-    .then(result => {
-        return response.json({
-            message: `Data siswa berhasil diubah`
+
+    modelSiswa.update(dataSiswa, { where: { id_siswa: id } })
+        .then(result => {
+            return response.json({
+                message: `Data siswa berhasil diubah`
+            })
         })
-    })
-    .catch(error => {
-        return response.json({
-            message: error.message
+        .catch(error => {
+            return response.json({
+                message: error.message
+            })
         })
-    })
 }
 
 exports.deleteDataSiswa = (request, response) => {
     let id = request.params.id_siswa
 
-    modelSiswa.destroy({where: {id_siswa: id}})
+    modelSiswa.destroy({ where: { id_siswa: id } })
         .then(result => {
             return response.json({
                 message: `Data siswa berhasil dihapus`

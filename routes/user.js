@@ -3,19 +3,10 @@ const app = express()
 
 app.use(express.json())
 
-// call user controller
-let userController = require("../controllers/userController")
+const userController = require("../controllers/userController")
 
-// endpoint get data user
-app.get("/", userController.getDataUser)
-
-// endpoint add data user
-app.post("/", userController.addDataUser)
-
-// endpoint edit user
-app.put("/:id_user", userController.editDataUser)
-
-// endpoint delete user
-app.delete("/:id_user", userController.deleteDataUser)
-
+app.get("/", userController.getUser)
+app.post("/", userController.addUser)
+app.put("/:id_user", userController.updateUser)
+app.delete("/:id_user", userController.deleteUser)
 module.exports = app
